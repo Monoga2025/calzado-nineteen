@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Calzado Nineteen — Mayorista AAA · Directo de Fábrica</title>
+<meta name="description" content="Fábrica colombiana de calzado mayorista. 297+ modelos AAA para boutiques, distribuidores y revendedores."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   RESET & VARIABLES
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111; --dark:#1a1a1a;
+  --gold:#C9A84C; --gold-l:#E8C97A;
+  --white:#fff; --off:#FAFAF8; --gray:#F4F3F0;
+  --border:#E8E4DC; --text:#222; --muted:#888; --muted2:#bbb;
+  --green:#25D366;
+  --font:'Inter',sans-serif;
+  --serif:'Playfair Display',serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+  --r:10px; --nav-h:64px; --bot-h:62px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--white);color:var(--text);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:var(--font);border:none;background:none}
+input,textarea,select{font-family:var(--font)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* ============================================================
+   NAV
+============================================================ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:var(--nav-h);
+  transition:background .3s,box-shadow .3s;
+}
+#nav.scrolled{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 1px 0 var(--border);
+  backdrop-filter:blur(14px);
+}
+.nav-logo{font-size:1.2rem;font-weight:900;letter-spacing:.08em;color:#fff;transition:color .3s}
+#nav.scrolled .nav-logo{color:var(--black)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);transition:color .2s;
+}
+#nav.scrolled .nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--gold)!important}
+.nav-cta{
+  background:var(--gold)!important;color:var(--black)!important;
+  padding:.45rem 1.1rem;border-radius:4px;font-weight:700!important;
+}
+.nav-cta:hover{background:var(--gold-l)!important;color:var(--black)!important}
+/* cart icon in nav */
+.nav-cart-btn{
+  display:flex;align-items:center;gap:.4rem;
+  background:none;color:rgba(255,255,255,.75);font-size:.7rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding:.4rem .7rem;
+  border:1px solid rgba(255,255,255,.25);border-radius:4px;transition:.2s;
+  position:relative;
+}
+#nav.scrolled .nav-cart-btn{color:var(--text);border-color:var(--border)}
+.nav-cart-btn:hover{border-color:var(--gold);color:var(--gold)!important}
+.nav-cart-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.cart-badge{
+  position:absolute;top:-6px;right:-6px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--gold);color:var(--black);font-size:.6rem;font-weight:900;
+  display:none;align-items:center;justify-content:center;
+  border:2px solid var(--white);
+}
+.cart-badge.show{display:flex}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hbg span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:.25s}
+#nav.scrolled .hbg span{background:var(--black)}
+
+/* ============================================================
+   MOBILE MENU
+============================================================ */
+#mob-ov{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.5)}
+#mob-ov.on{display:block}
+#mob-menu{
+  position:fixed;top:0;right:-100%;bottom:0;z-index:601;
+  width:min(290px,80vw);background:var(--white);
+  display:flex;flex-direction:column;padding:5rem 1.8rem 2rem;
+  box-shadow:-4px 0 30px rgba(0,0,0,.12);transition:right .3s var(--ease);
+}
+#mob-menu.on{right:0}
+#mob-menu a{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.88rem;font-weight:600;color:var(--text);
+  padding:.85rem 0;border-bottom:1px solid var(--border);transition:color .15s;
+}
+#mob-menu a:last-of-type{border-bottom:none}
+#mob-menu a:hover{color:var(--gold)}
+#mob-menu a svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}
+.mob-cart-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:1.2rem;background:var(--gold);color:var(--black);
+  padding:.9rem 1rem;border-radius:8px;font-size:.82rem;font-weight:800;
+  cursor:pointer;
+}
+.mob-cart-count{
+  background:var(--black);color:var(--gold);
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:900;
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+#hero{
+  position:relative;height:min(90vh,820px);min-height:540px;
+  display:flex;align-items:center;overflow:hidden;background:#0a0a0a;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('assets/images/tacon_cubano.jpg') center 30%/cover no-repeat;
+  filter:brightness(.28);transform:scale(1.05);
+  transition:transform 8s var(--ease);
+}
+#hero.go .hero-bg{transform:scale(1)}
+.hero-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(110deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.2) 60%,rgba(0,0,0,.65) 100%);
+}
+.hero-body{position:relative;z-index:2;padding:0 6%;max-width:620px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.6rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;
+}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--gold)}
+h1.h1{
+  font-family:var(--serif);font-size:clamp(2.4rem,6vw,4.8rem);font-weight:700;
+  color:#fff;line-height:1.06;letter-spacing:-.02em;margin-bottom:1rem;
+}
+h1.h1 em{color:var(--gold);font-style:italic}
+.hero-sub{
+  font-size:clamp(.82rem,1.5vw,.97rem);color:rgba(255,255,255,.58);
+  line-height:1.75;margin-bottom:1.9rem;max-width:440px;
+}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--gold);color:var(--black);font-size:.73rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;padding:.82rem 1.8rem;border-radius:4px;
+  transition:.25s var(--ease);
+}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 8px 22px rgba(201,168,76,.35)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:transparent;color:#fff;font-size:.73rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;padding:.82rem 1.8rem;
+  border:1px solid rgba(255,255,255,.28);border-radius:4px;transition:.25s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.07)}
+.hero-stats{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  display:flex;background:rgba(0,0,0,.65);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(201,168,76,.18);
+}
+.hstat{flex:1;text-align:center;padding:.95rem .5rem;border-right:1px solid rgba(201,168,76,.1)}
+.hstat:last-child{border-right:none}
+.hstat-n{font-family:var(--serif);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:700;color:var(--gold)}
+.hstat-l{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.18rem}
+
+/* ============================================================
+   TICKER
+============================================================ */
+.ticker{background:var(--gold);padding:.6rem 0;overflow:hidden}
+.t-track{display:flex;gap:2.5rem;animation:tick 28s linear infinite;white-space:nowrap;width:max-content}
+.t-track span{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--black)}
+.t-dot{opacity:.3}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   SECTION UTILS
+============================================================ */
+.sec{padding:5rem 5%}
+.sec-dark{background:var(--black)}
+.sec-gray{background:var(--gray)}
+.s-eye{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-size:.58rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.7rem;
+}
+.s-eye::before{content:'';width:22px;height:1px;background:var(--gold)}
+.s-eye.center{justify-content:center}
+.s-eye.center::before{display:none}
+.s-title{font-family:var(--serif);font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.s-title em{font-style:italic;color:var(--gold)}
+.s-title-w{color:#fff}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ============================================================
+   VALUE STRIP
+============================================================ */
+.val-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.vc{padding:2rem 1.6rem;border-right:1px solid rgba(255,255,255,.06)}
+.vc:last-child{border-right:none}
+.vc-ico{font-size:1.3rem;margin-bottom:.75rem}
+.vc-t{font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.28rem;letter-spacing:.02em}
+.vc-d{font-size:.7rem;color:rgba(255,255,255,.4);line-height:1.6}
+
+/* ============================================================
+   CATALOG / VITRINA
+============================================================ */
+#catalog{background:var(--off)}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.6rem;flex-wrap:wrap;gap:1rem}
+.cat-link{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:2px;transition:.2s}
+.cat-link:hover{color:var(--gold);border-color:var(--gold)}
+.filters{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.f-btn{
+  font-size:.63rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  padding:.42rem 1rem;border-radius:20px;cursor:pointer;
+  border:1.5px solid var(--border);background:var(--white);color:var(--muted);transition:.18s;
+}
+.f-btn.on,.f-btn:hover{background:var(--black);color:#fff;border-color:var(--black)}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+
+/* product card */
+.pc{
+  background:var(--white);border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--border);transition:transform .28s var(--ease),box-shadow .28s;
+  display:flex;flex-direction:column;
+}
+.pc:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.09)}
+.pc-img{aspect-ratio:3/4;overflow:hidden;background:var(--gray);position:relative;flex-shrink:0}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.pc:hover .pc-img img{transform:scale(1.05)}
+.pc-badge{
+  position:absolute;top:.5rem;left:.5rem;
+  background:var(--gold);color:var(--black);
+  font-size:.52rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:.18rem .52rem;border-radius:3px;
+}
+.pc-body{padding:.75rem .88rem .9rem;display:flex;flex-direction:column;flex:1}
+.pc-name{font-size:.86rem;font-weight:700;color:var(--black);margin-bottom:.18rem;line-height:1.25}
+.pc-desc{font-size:.65rem;color:var(--muted);margin-bottom:.6rem;line-height:1.4;flex:1}
+.pc-footer{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
+.pc-price{font-size:.75rem;font-weight:700;color:var(--black);flex-shrink:0}
+.pc-add{
+  display:inline-flex;align-items:center;gap:.28rem;
+  font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--black);color:#fff;padding:.32rem .72rem;border-radius:4px;
+  transition:.18s;flex-shrink:0;
+}
+.pc-add:hover{background:var(--gold);color:var(--black)}
+.pc-add.added{background:var(--green);color:#fff}
+.pc-add svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;flex-shrink:0}
+.no-prods{grid-column:1/-1;text-align:center;padding:3.5rem;color:var(--muted);font-size:.88rem}
+
+/* ============================================================
+   HOW IT WORKS
+============================================================ */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.8rem}
+.step{text-align:center;padding:1.2rem}
+.step-n{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--black);color:var(--gold);
+  font-family:var(--serif);font-size:1.1rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;
+}
+.step-t{font-size:.82rem;font-weight:700;color:var(--black);margin-bottom:.4rem}
+.step-d{font-size:.73rem;color:var(--muted);line-height:1.6}
+
+/* ============================================================
+   WHO IS IT FOR
+============================================================ */
+.who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-top:2.2rem}
+.wc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:1.6rem 1.2rem;transition:.25s}
+.wc:hover{border-color:rgba(201,168,76,.35);background:rgba(201,168,76,.05);transform:translateY(-3px)}
+.wc-ico{font-size:1.5rem;margin-bottom:.7rem}
+.wc-t{font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.wc-d{font-size:.7rem;color:rgba(255,255,255,.38);line-height:1.6}
+
+/* ============================================================
+   PAYMENTS
+============================================================ */
+.pay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-top:1.8rem}
+.pay-c{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;transition:.2s}
+.pay-c:hover{border-color:var(--gold);transform:translateY(-2px)}
+.pay-ico{font-size:1.4rem;margin-bottom:.5rem}
+.pay-t{font-size:.76rem;font-weight:700;color:var(--black);margin-bottom:.22rem}
+.pay-d{font-size:.68rem;color:var(--muted);line-height:1.5}
+.flags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.6rem}
+.flag{display:flex;align-items:center;gap:.35rem;background:var(--white);border:1px solid var(--border);border-radius:20px;padding:.35rem .8rem;font-size:.68rem;font-weight:600}
+
+/* ============================================================
+   GALLERY
+============================================================ */
+.gal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem;margin-top:1.3rem}
+.g-item{aspect-ratio:1;overflow:hidden;cursor:zoom-in;position:relative;background:var(--gray)}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .45s,filter .3s}
+.g-item:hover img{transform:scale(1.07);filter:brightness(.55)}
+.g-item::after{content:'';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;opacity:0;transition:.25s;pointer-events:none}
+.g-item:hover::after{content:'🔍';opacity:1}
+
+/* ============================================================
+   REVIEWS
+============================================================ */
+.rev-wrap{max-width:640px;margin:0 auto;text-align:center}
+.stars{color:var(--gold);font-size:1rem;letter-spacing:.08rem;margin-bottom:1.3rem}
+.rev-q{font-family:var(--serif);font-size:clamp(1rem,1.9vw,1.3rem);font-style:italic;color:var(--text);line-height:1.65}
+.rev-auth{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:1rem}
+.rev-dots{display:flex;justify-content:center;gap:.38rem;margin-top:1.5rem}
+.rev-dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s}
+.rev-dot.on{background:var(--gold);transform:scale(1.3)}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start}
+.adv-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.6rem}
+.adv-card{
+  display:flex;align-items:center;gap:.85rem;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r);padding:.9rem 1rem;transition:.22s;text-decoration:none;
+}
+.adv-card:hover{background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.3);transform:translateX(4px)}
+.adv-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:.85rem;flex-shrink:0}
+.av1{background:linear-gradient(135deg,#25D366,#128C7E)}
+.av2{background:linear-gradient(135deg,#128C7E,#075E54)}
+.av3{background:linear-gradient(135deg,var(--gold),var(--gold-l))}
+.adv-nm{font-size:.8rem;font-weight:700;color:#fff}
+.adv-rg{font-size:.61rem;color:var(--green);margin-top:.05rem}
+.adv-arr{margin-left:auto;color:rgba(255,255,255,.22);font-size:.85rem}
+.info-list{display:flex;flex-direction:column;gap:.9rem;margin-top:1.6rem}
+.info-row{display:flex;gap:.75rem;align-items:flex-start}
+.info-ico{font-size:.9rem;flex-shrink:0;margin-top:.08rem}
+.info-txt{font-size:.78rem;color:rgba(255,255,255,.48);line-height:1.6}
+.info-txt strong{color:#fff;display:block;margin-bottom:.08rem}
+.info-txt a{color:var(--gold)}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{
+  background:var(--black);border-top:1px solid rgba(255,255,255,.06);
+  padding:1.6rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.9rem;
+}
+.ft-logo{font-size:1rem;font-weight:900;letter-spacing:.1em;color:#fff}
+.ft-logo span{color:var(--gold)}
+.ft-links{display:flex;gap:1.3rem;list-style:none}
+.ft-links a{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);transition:.2s}
+.ft-links a:hover{color:var(--gold)}
+.ft-copy{font-size:.58rem;color:rgba(255,255,255,.18)}
+
+/* ============================================================
+   CART DRAWER
+============================================================ */
+#cart-ov{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.45)}
+#cart-ov.on{display:block}
+#cart-drawer{
+  position:fixed;top:0;right:-100%;bottom:0;z-index:701;
+  width:min(400px,96vw);background:var(--white);
+  display:flex;flex-direction:column;
+  box-shadow:-6px 0 40px rgba(0,0,0,.18);
+  transition:right .32s var(--ease);
+}
+#cart-drawer.on{right:0}
+.cart-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 1.3rem;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.cart-hdr h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--black)}
+.cart-hdr-right{display:flex;align-items:center;gap:.7rem}
+.cart-count-chip{
+  background:var(--gold);color:var(--black);
+  font-size:.62rem;font-weight:900;letter-spacing:.06em;
+  padding:.18rem .55rem;border-radius:20px;
+}
+.cart-close{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--gray);display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;color:var(--muted);transition:.15s;
+}
+.cart-close:hover{background:var(--border);color:var(--black)}
+.cart-body{flex:1;overflow-y:auto;padding:.8rem 1rem}
+.cart-body::-webkit-scrollbar{width:3px}
+.cart-empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:.8rem;color:var(--muted2);text-align:center;padding:2rem;
+}
+.cart-empty svg{width:52px;height:52px;stroke:var(--border);stroke-width:1.2;fill:none}
+.cart-empty p{font-size:.82rem;color:var(--muted)}
+.cart-item{
+  display:flex;gap:.85rem;align-items:flex-start;
+  padding:.8rem 0;border-bottom:1px solid var(--border);
+}
+.ci-img{width:58px;height:70px;border-radius:6px;overflow:hidden;background:var(--gray);flex-shrink:0}
+.ci-img img{width:100%;height:100%;object-fit:cover}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:.8rem;font-weight:700;color:var(--black);margin-bottom:.18rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-desc{font-size:.65rem;color:var(--muted);margin-bottom:.5rem;line-height:1.3}
+.ci-controls{display:flex;align-items:center;gap:.5rem}
+.qty-btn{
+  width:26px;height:26px;border-radius:5px;
+  background:var(--gray);color:var(--black);font-size:.95rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;transition:.15s;
+}
+.qty-btn:hover{background:var(--black);color:#fff}
+.qty-n{font-size:.8rem;font-weight:700;color:var(--black);min-width:20px;text-align:center}
+.ci-remove{
+  background:none;color:var(--muted2);font-size:.75rem;
+  padding:.2rem .4rem;border-radius:4px;transition:.15s;margin-left:auto;
+}
+.ci-remove:hover{background:rgba(220,38,38,.08);color:#DC2626}
+.cart-footer{padding:1.1rem 1.3rem;border-top:1px solid var(--border);flex-shrink:0;background:var(--white)}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.cart-subtotal span:first-child{font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.cart-subtotal span:last-child{font-size:.9rem;font-weight:800;color:var(--black)}
+.cart-actions{display:flex;flex-direction:column;gap:.55rem}
+.cart-btn-wa{
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  background:var(--green);color:#fff;font-size:.78rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:.9rem;
+  border-radius:8px;transition:.2s;text-decoration:none;
+}
+.cart-btn-wa:hover{background:#20c05a;transform:translateY(-1px);box-shadow:0 6px 18px rgba(37,211,102,.35)}
+.cart-btn-wa svg{width:18px;height:18px;fill:#fff;flex-shrink:0}
+.cart-btn-form{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  background:var(--black);color:#fff;font-size:.78rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:.9rem;
+  border-radius:8px;transition:.2s;
+}
+.cart-btn-form:hover{background:var(--dark);transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.cart-btn-form svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.5;flex-shrink:0}
+.cart-clear{
+  font-size:.62rem;font-weight:600;color:var(--muted2);
+  text-align:center;margin-top:.6rem;transition:.15s;display:block;
+}
+.cart-clear:hover{color:#DC2626}
+
+/* ============================================================
+   ORDER FORM MODAL
+============================================================ */
+#form-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem}
+#form-ov.on{display:flex}
+.form-modal{
+  background:var(--white);border-radius:14px;width:100%;max-width:480px;
+  max-height:90vh;overflow-y:auto;
+  box-shadow:0 24px 60px rgba(0,0,0,.3);
+  animation:fmSlide .3s var(--ease);
+}
+@keyframes fmSlide{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.fm-hdr{
+  padding:1.3rem 1.4rem 1rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.fm-hdr h3{font-family:var(--serif);font-size:1.05rem;font-weight:700}
+.fm-close{
+  width:28px;height:28px;border-radius:50%;background:var(--gray);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;color:var(--muted);transition:.15s;
+}
+.fm-close:hover{background:var(--border);color:var(--black)}
+.fm-body{padding:1.2rem 1.4rem}
+.fm-summary{
+  background:var(--gray);border-radius:8px;padding:.9rem 1rem;
+  margin-bottom:1.2rem;font-size:.72rem;color:var(--text);line-height:1.8;
+  max-height:120px;overflow-y:auto;
+}
+.fm-summary strong{font-weight:700;display:block;margin-bottom:.35rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fld{margin-bottom:.9rem}
+.fld label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.38rem}
+.fld input,.fld select,.fld textarea{
+  width:100%;padding:.65rem .85rem;
+  border:1.5px solid var(--border);border-radius:8px;
+  font-size:.83rem;color:var(--text);background:var(--white);
+  outline:none;transition:border .2s;
+}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--gold)}
+.fld textarea{resize:vertical;min-height:72px;line-height:1.5}
+.fld-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.fm-submit{
+  width:100%;background:var(--black);color:#fff;
+  font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:1rem;border-radius:8px;transition:.2s;margin-top:.3rem;
+}
+.fm-submit:hover{background:var(--gold);color:var(--black)}
+/* success state */
+.fm-success{
+  display:none;flex-direction:column;align-items:center;
+  text-align:center;padding:2rem 1.4rem;gap:.7rem;
+}
+.fm-success.on{display:flex}
+.fm-success .check{font-size:3rem;margin-bottom:.3rem}
+.fm-success h4{font-family:var(--serif);font-size:1.1rem;font-weight:700}
+.fm-success p{font-size:.8rem;color:var(--muted);line-height:1.6;max-width:320px}
+.fm-success .wa-confirm{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--green);color:#fff;font-size:.75rem;font-weight:700;
+  padding:.75rem 1.5rem;border-radius:8px;margin-top:.5rem;
+}
+
+/* ============================================================
+   WA FAB
+============================================================ */
+#wa-fab{position:fixed;bottom:1.4rem;left:1.4rem;z-index:900;display:flex;flex-direction:column;align-items:flex-start;gap:.5rem}
+.wa-main{
+  width:52px;height:52px;border-radius:50%;background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 4px 16px rgba(37,211,102,.4);
+  transition:.28s;position:relative;
+}
+.wa-main:hover{transform:scale(1.08);box-shadow:0 8px 22px rgba(37,211,102,.5)}
+.wa-main svg{width:22px;height:22px;fill:#fff}
+.wa-pulse{position:absolute;inset:-4px;border-radius:50%;background:rgba(37,211,102,.2);animation:wap 2.2s ease-in-out infinite}
+@keyframes wap{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.35);opacity:0}}
+.wa-panel{display:none;flex-direction:column;gap:.4rem;background:#fff;border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.13);padding:.85rem .75rem;width:228px;order:-1;animation:ps .2s ease}
+.wa-panel.on{display:flex}
+@keyframes ps{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.wa-ptitle{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-bottom:.5rem;border-bottom:1px solid var(--border);margin-bottom:.1rem}
+.wa-item{display:flex;align-items:center;gap:.55rem;padding:.5rem;border-radius:7px;background:rgba(37,211,102,.04);border:1px solid rgba(37,211,102,.1);text-decoration:none;transition:.14s}
+.wa-item:hover{background:rgba(37,211,102,.1)}
+.wa-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:#fff;flex-shrink:0}
+.wa-nm{font-size:.72rem;font-weight:700;color:var(--black)}
+.wa-rg{font-size:.58rem;color:var(--green);margin-top:.02rem}
+
+/* ============================================================
+   LIGHTBOX
+============================================================ */
+#lb{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;cursor:zoom-out;backdrop-filter:blur(8px)}
+#lb.on{display:flex}
+#lb img{max-width:88vw;max-height:88vh;object-fit:contain;border-radius:4px;cursor:default;user-select:none}
+.lb-x{position:absolute;top:.9rem;right:1.3rem;color:#fff;font-size:1.3rem;opacity:.4;transition:.15s;line-height:1;padding:.35rem}
+.lb-x:hover{opacity:1}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);color:#fff;font-size:1.3rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.18s}
+.lb-nav:hover{background:rgba(201,168,76,.28);border-color:var(--gold)}
+#lb-prev{left:.9rem}
+#lb-next{right:.9rem}
+.lb-cnt{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);font-size:.58rem;letter-spacing:.16em;color:rgba(255,255,255,.32);text-transform:uppercase}
+
+/* ============================================================
+   SCROLL TOP
+============================================================ */
+#top-btn{
+  position:fixed;bottom:1.4rem;right:1.4rem;z-index:800;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--black);border:1px solid rgba(201,168,76,.3);color:var(--gold);
+  font-size:.88rem;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;opacity:0;pointer-events:none;transition:.3s;
+  box-shadow:0 4px 12px rgba(0,0,0,.22);
+}
+#top-btn.on{opacity:1;pointer-events:all}
+#top-btn:hover{background:var(--gold);color:var(--black)}
+
+/* ============================================================
+   MOBILE BOTTOM NAV (≤ 640px)
+============================================================ */
+#bot-nav{display:none}
+@media(max-width:640px){
+  #bot-nav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:500;
+    height:var(--bot-h);background:var(--white);
+    border-top:1px solid var(--border);
+    align-items:center;justify-content:space-around;
+    box-shadow:0 -4px 18px rgba(0,0,0,.07);
+  }
+  .bn-item{
+    display:flex;flex-direction:column;align-items:center;gap:.18rem;
+    flex:1;padding:.35rem 0;font-size:.52rem;font-weight:600;color:var(--muted2);
+    letter-spacing:.04em;text-transform:uppercase;transition:color .18s;cursor:pointer;
+  }
+  .bn-item svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+  .bn-item.on{color:var(--black)}
+  .bn-center{
+    width:48px;height:48px;border-radius:50%;background:var(--black);
+    display:flex;align-items:center;justify-content:center;
+    margin-top:-14px;box-shadow:0 4px 16px rgba(0,0,0,.28);flex-shrink:0;
+    position:relative;
+  }
+  .bn-center svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2}
+  body{padding-bottom:var(--bot-h)}
+  #top-btn{bottom:calc(var(--bot-h) + .8rem);right:.9rem}
+  #wa-fab{bottom:calc(var(--bot-h) + .8rem);left:.9rem}
+}
+
+/* ============================================================
+   RESPONSIVE GRID
+============================================================ */
+@media(max-width:1100px){
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
+  .val-grid{grid-template-columns:repeat(2,1fr)}
+  .who-grid{grid-template-columns:repeat(2,1fr)}
+  .pay-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:860px){
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:.75rem}
+  .steps{grid-template-columns:1fr;gap:.9rem}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+  .gal-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:540px){
+  .sec{padding:2.8rem 4%}
+  h1.h1{font-size:2.4rem}
+  .val-grid{grid-template-columns:1fr}
+  .who-grid{grid-template-columns:1fr 1fr}
+  .pay-grid{grid-template-columns:1fr 1fr}
+  .gal-grid{grid-template-columns:repeat(2,1fr)}
+  footer{flex-direction:column;text-align:center}
+  .ft-links{flex-wrap:wrap;justify-content:center}
+  .fld-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ── MOBILE OVERLAY ── -->
+<div id="mob-ov" onclick="closeMenu()"></div>
+<div id="mob-menu">
+  <a href="#catalog" onclick="closeMenu()">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Catálogo
+  </a>
+  <a href="#how" onclick="closeMenu()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Cómo funciona
+  </a>
+  <a href="#who" onclick="closeMenu()">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Para quién
+  </a>
+  <a href="#payments" onclick="closeMenu()">
+    <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    Pagos y envíos
+  </a>
+  <a href="#contact" onclick="closeMenu()">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Contacto
+  </a>
+  <div class="mob-cart-row" onclick="closeMenu();openCart()">
+    <span>🛒 Ver Carrito</span>
+    <div class="mob-cart-count" id="mob-cart-n">0</div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">NINETEEN<span>®</span></a>
+  <ul class="nav-links">
+    <li><a href="#catalog">Catálogo</a></li>
+    <li><a href="#how">Cómo funciona</a></li>
+    <li><a href="#who">Para quién</a></li>
+    <li><a href="#payments">Envíos</a></li>
+    <li><a href="#contact" class="nav-cta">Contactar</a></li>
+    <li>
+      <button class="nav-cart-btn" onclick="openCart()">
+        <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Carrito
+        <div class="cart-badge" id="cart-badge">0</div>
+      </button>
+    </li>
+  </ul>
+  <button class="hbg" id="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-body">
+    <div class="hero-tag">Distribuidor Mayorista · Fábrica Colombiana</div>
+    <h1 class="h1">Calzado AAA<br/><em>directo de fábrica.</em></h1>
+    <p class="hero-sub">Para boutiques, distribuidores y revendedores. Precio mayorista sin intermediarios — 297+ modelos, envíos a 4 países.</p>
+    <div class="hero-btns">
+      <a href="#catalog" class="btn-gold">
+        Ver Catálogo
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Hablar con Asesora</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n" id="hc1" data-t="297">0</div><div class="hstat-l">Modelos</div></div>
+    <div class="hstat"><div class="hstat-n" id="hc2" data-t="20">0</div><div class="hstat-l">K Seguidores</div></div>
+    <div class="hstat"><div class="hstat-n">AAA</div><div class="hstat-l">Calidad</div></div>
+    <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">Países</div></div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker"><div class="t-track">
+  <span>Calidad AAA</span><span class="t-dot">◆</span>
+  <span>Precio Mayorista</span><span class="t-dot">◆</span>
+  <span>Sin Intermediarios</span><span class="t-dot">◆</span>
+  <span>Colombia</span><span class="t-dot">◆</span>
+  <span>Venezuela</span><span class="t-dot">◆</span>
+  <span>Panamá</span><span class="t-dot">◆</span>
+  <span>Ecuador</span><span class="t-dot">◆</span>
+  <span>Contraentrega</span><span class="t-dot">◆</span>
+  <span>Crédito Addi</span><span class="t-dot">◆</span>
+  <span>297+ Modelos</span><span class="t-dot">◆</span>
+  <span>Calidad AAA</span><span class="t-dot">◆</span>
+  <span>Precio Mayorista</span><span class="t-dot">◆</span>
+  <span>Sin Intermediarios</span><span class="t-dot">◆</span>
+  <span>Colombia</span><span class="t-dot">◆</span>
+  <span>Venezuela</span><span class="t-dot">◆</span>
+  <span>Panamá</span><span class="t-dot">◆</span>
+  <span>Ecuador</span><span class="t-dot">◆</span>
+  <span>Contraentrega</span><span class="t-dot">◆</span>
+  <span>Crédito Addi</span><span class="t-dot">◆</span>
+  <span>297+ Modelos</span><span class="t-dot">◆</span>
+</div></div>
+
+<!-- ── VALUE STRIP ── -->
+<section class="sec-dark">
+  <div class="val-grid">
+    <div class="vc reveal"><div class="vc-ico">🏭</div><div class="vc-t">Directo de Fábrica</div><div class="vc-d">Sin intermediarios. Precio mayorista real, máximo margen para tu negocio.</div></div>
+    <div class="vc reveal d1"><div class="vc-ico">✦</div><div class="vc-t">Calidad AAA Garantizada</div><div class="vc-d">Materiales premium, acabados de exportación. Calzado que tus clientes van a amar.</div></div>
+    <div class="vc reveal d2"><div class="vc-ico">🌎</div><div class="vc-t">Envíos a 4 Países</div><div class="vc-d">Colombia, Venezuela, Panamá y Ecuador. Logística segura con número de seguimiento.</div></div>
+    <div class="vc reveal d3"><div class="vc-ico">💬</div><div class="vc-t">Asesoría Personalizada</div><div class="vc-d">Tu asesora te ayuda a elegir, negociar volumen y rastrear tu pedido por WhatsApp.</div></div>
+  </div>
+</section>
+
+<!-- ── CATALOG (VITRINA) ── -->
+<section id="catalog" class="sec sec-gray">
+  <div class="cat-top">
+    <div>
+      <div class="s-eye reveal">Catálogo Mayorista</div>
+      <h2 class="s-title reveal d1">297+ modelos<br/><em>para revender.</em></h2>
+    </div>
+    <a href="https://www.instagram.com/catalogo_19" target="_blank" class="cat-link">Ver catálogo IG →</a>
+  </div>
+  <div class="filters" id="filters">
+    <button class="f-btn on" data-cat="all">Todos</button>
+    <button class="f-btn" data-cat="tacon">Tacones</button>
+    <button class="f-btn" data-cat="botin">Botines</button>
+    <button class="f-btn" data-cat="baleta">Baletas</button>
+    <button class="f-btn" data-cat="sandalia">Sandalias</button>
+    <button class="f-btn" data-cat="deportivo">Deportivos</button>
+    <button class="f-btn" data-cat="kids">Kids</button>
+  </div>
+  <div class="prod-grid" id="prod-grid"></div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how" class="sec">
+  <div style="text-align:center;max-width:480px;margin:0 auto">
+    <div class="s-eye center reveal">Proceso de Compra</div>
+    <h2 class="s-title reveal d1">Así de fácil es<br/><em>hacer tu pedido.</em></h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-n">1</div>
+      <div class="step-t">Elige tus modelos</div>
+      <div class="step-d">Explora el catálogo, filtra por categoría y agrega al carrito los modelos para tu negocio.</div>
+    </div>
+    <div class="step reveal d1">
+      <div class="step-n">2</div>
+      <div class="step-t">Realiza tu pedido</div>
+      <div class="step-d">Desde el carrito puedes pedir directo por WhatsApp o a través del formulario de la app.</div>
+    </div>
+    <div class="step reveal d2">
+      <div class="step-n">3</div>
+      <div class="step-t">Recibe y vende</div>
+      <div class="step-d">Despachamos desde nuestra fábrica en Colombia directo a tu puerta con seguimiento.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO IS IT FOR ── -->
+<section id="who" class="sec sec-dark">
+  <div class="s-eye reveal">Clientes Mayoristas</div>
+  <h2 class="s-title s-title-w reveal d1">¿Para quién es<br/><em>Nineteen?</em></h2>
+  <div class="who-grid">
+    <div class="wc reveal"><div class="wc-ico">🏪</div><div class="wc-t">Boutiques y Tiendas</div><div class="wc-d">Surtido exclusivo con calidad AAA. Modelos que no encuentras en cualquier distribuidor.</div></div>
+    <div class="wc reveal d1"><div class="wc-ico">📦</div><div class="wc-t">Distribuidores</div><div class="wc-d">Precios competitivos por volumen. Trabaja con una fábrica confiable que cumple y entrega.</div></div>
+    <div class="wc reveal d2"><div class="wc-ico">📱</div><div class="wc-t">Revendedoras Online</div><div class="wc-d">Ideal para catálogos digitales, redes sociales y tiendas en línea. Margen atractivo.</div></div>
+    <div class="wc reveal d3"><div class="wc-ico">🚀</div><div class="wc-t">Emprendedoras</div><div class="wc-d">Sin experiencia previa. Tu asesora te guía desde el primer pedido hasta la primera venta.</div></div>
+  </div>
+</section>
+
+<!-- ── PAYMENTS ── -->
+<section id="payments" class="sec sec-gray">
+  <div class="s-eye reveal">Formas de Pago y Envío</div>
+  <h2 class="s-title reveal d1">Paga como<br/><em>prefieras.</em></h2>
+  <div class="pay-grid">
+    <div class="pay-c reveal"><div class="pay-ico">🚚</div><div class="pay-t">Contraentrega</div><div class="pay-d">Paga al recibir. Disponible en Colombia.</div></div>
+    <div class="pay-c reveal d1"><div class="pay-ico">💳</div><div class="pay-t">Crédito Addi</div><div class="pay-d">Cuotas sin intereses para tu negocio.</div></div>
+    <div class="pay-c reveal d2"><div class="pay-ico">💸</div><div class="pay-t">Transferencia</div><div class="pay-d">Nequi · Bancolombia · Bancaria.</div></div>
+    <div class="pay-c reveal d3"><div class="pay-ico">💱</div><div class="pay-t">USD / VES</div><div class="pay-d">Para clientes internacionales.</div></div>
+  </div>
+  <div class="flags reveal">
+    <div class="flag">🇨🇴 Colombia</div>
+    <div class="flag">🇻🇪 Venezuela</div>
+    <div class="flag">🇵🇦 Panamá</div>
+    <div class="flag">🇪🇨 Ecuador</div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery" class="sec">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.3rem">
+    <div>
+      <div class="s-eye reveal">Instagram</div>
+      <h2 class="s-title reveal d1">@calzadonineteen</h2>
+    </div>
+    <a href="https://www.instagram.com/calzadonineteen" target="_blank" class="cat-link reveal">📸 Ver perfil →</a>
+  </div>
+  <div class="gal-grid">
+    <div class="g-item reveal" onclick="openLb(0)"><img src="assets/images/botin_liston.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d1" onclick="openLb(1)"><img src="assets/images/tacon_ruby.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d2" onclick="openLb(2)"><img src="assets/images/cuna_perlas_lifestyle.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d3" onclick="openLb(3)"><img src="assets/images/sneaker_lifestyle.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d4" onclick="openLb(4)"><img src="assets/images/baleta_kiut.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal" onclick="openLb(5)"><img src="assets/images/tacon_alice.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d1" onclick="openLb(6)"><img src="assets/images/dos_estilos.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d2" onclick="openLb(7)"><img src="assets/images/baleta_leopardo.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d3" onclick="openLb(8)"><img src="assets/images/modelo_lifestyle.jpg" loading="lazy" alt=""/></div>
+    <div class="g-item reveal d4" onclick="openLb(9)"><img src="assets/images/welcome.jpg" loading="lazy" alt=""/></div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section id="reviews" class="sec sec-gray" style="text-align:center">
+  <div class="rev-wrap">
+    <div class="s-eye center reveal">Clientes Satisfechos</div>
+    <h2 class="s-title reveal d1" style="margin-bottom:1.8rem">Más de <em>10,000</em> pedidos.</h2>
+    <div class="stars reveal d2">★★★★★</div>
+    <div id="rev-box" class="reveal d3">
+      <p class="rev-q">"Recibí mis botines en perfectas condiciones. La calidad es increíble para el precio. ¡Ya hice mi segundo pedido para mi boutique!"</p>
+      <div class="rev-auth">— María González · Boutique · Bogotá, Colombia</div>
+    </div>
+    <div class="rev-dots">
+      <div class="rev-dot on" onclick="goRev(0)"></div>
+      <div class="rev-dot" onclick="goRev(1)"></div>
+      <div class="rev-dot" onclick="goRev(2)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="sec sec-dark">
+  <div class="contact-grid">
+    <div>
+      <div class="s-eye reveal">Asesoras Personales</div>
+      <h2 class="s-title s-title-w reveal d1">Habla con<br/><em>tu asesora.</em></h2>
+      <p class="reveal d2" style="font-size:.82rem;color:rgba(255,255,255,.42);line-height:1.75;margin-top:.85rem;max-width:380px">Atención personalizada por WhatsApp. Te ayudamos a elegir, negociar volumen y rastrear tu pedido.</p>
+      <div class="adv-list reveal d3">
+        <a class="adv-card" href="https://wa.me/573134656014?text=Hola%20Luisa%2C%20quiero%20información%20de%20precios%20mayoristas%20de%20Calzado%20Nineteen" target="_blank">
+          <div class="adv-av av1">L</div>
+          <div><div class="adv-nm">Luisa</div><div class="adv-rg">🇨🇴 Colombia · 🇪🇨 Ecuador</div></div>
+          <span class="adv-arr">→</span>
+        </a>
+        <a class="adv-card" href="https://wa.me/573138577820?text=Hola%20Sofia%2C%20quiero%20información%20de%20precios%20mayoristas%20de%20Calzado%20Nineteen" target="_blank">
+          <div class="adv-av av2">S</div>
+          <div><div class="adv-nm">Sofia</div><div class="adv-rg">🇻🇪 Venezuela · 🇵🇦 Panamá</div></div>
+          <span class="adv-arr">→</span>
+        </a>
+        <a class="adv-card" href="https://wa.me/573228634757?text=Hola%20Sara%2C%20tengo%20preguntas%20sobre%20precios%20mayoristas%20de%20Calzado%20Nineteen" target="_blank">
+          <div class="adv-av av3">S</div>
+          <div><div class="adv-nm">Sara</div><div class="adv-rg">✦ Especialista Calidad AAA</div></div>
+          <span class="adv-arr">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <h3 style="font-family:var(--serif);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.2rem">Información</h3>
+      <div class="info-list">
+        <div class="info-row"><span class="info-ico">📍</span><div class="info-txt"><strong>Ubicación</strong>Fábrica en Colombia — mayor y detal, directo del productor</div></div>
+        <div class="info-row"><span class="info-ico">📦</span><div class="info-txt"><strong>Envíos</strong>Colombia · Venezuela · Panamá · Ecuador</div></div>
+        <div class="info-row"><span class="info-ico">💳</span><div class="info-txt"><strong>Formas de Pago</strong>Contraentrega · Addi · Transferencia · USD · VES</div></div>
+        <div class="info-row"><span class="info-ico">🎯</span><div class="info-txt"><strong>Catálogo completo</strong><a href="https://www.instagram.com/catalogo_19" target="_blank">@catalogo_19</a> — 297+ modelos</div></div>
+        <div class="info-row"><span class="info-ico">📸</span><div class="info-txt"><strong>Instagram</strong><a href="https://www.instagram.com/calzadonineteen" target="_blank">@calzadonineteen</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="ft-logo">NINETEEN<span>®</span></div>
+  <ul class="ft-links">
+    <li><a href="#catalog">Catálogo</a></li>
+    <li><a href="https://www.instagram.com/calzadonineteen" target="_blank">Instagram</a></li>
+    <li><a href="https://www.instagram.com/catalogo_19" target="_blank">Catálogo IG</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <div class="ft-copy">© 2025 Calzado Nineteen · Fábrica Colombiana</div>
+</footer>
+
+<!-- ── WA FAB ── -->
+<div id="wa-fab">
+  <div class="wa-panel" id="wa-panel">
+    <div class="wa-ptitle">¿Con quién deseas hablar?</div>
+    <a class="wa-item" href="https://wa.me/573134656014?text=Hola%20Luisa%2C%20quiero%20hacer%20un%20pedido%20mayorista" target="_blank"><div class="wa-av av1">L</div><div><div class="wa-nm">Luisa</div><div class="wa-rg">Colombia · Ecuador</div></div></a>
+    <a class="wa-item" href="https://wa.me/573138577820?text=Hola%20Sofia%2C%20quiero%20hacer%20un%20pedido%20mayorista" target="_blank"><div class="wa-av av2">S</div><div><div class="wa-nm">Sofia</div><div class="wa-rg">Venezuela · Panamá</div></div></a>
+    <a class="wa-item" href="https://wa.me/573228634757?text=Hola%20Sara%2C%20tengo%20preguntas" target="_blank"><div class="wa-av av3">S</div><div><div class="wa-nm">Sara</div><div class="wa-rg">Calidad AAA</div></div></a>
+  </div>
+  <button class="wa-main" onclick="toggleWa()">
+    <div class="wa-pulse"></div>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </button>
+</div>
+
+<!-- ── CART DRAWER ── -->
+<div id="cart-ov" onclick="closeCart()"></div>
+<div id="cart-drawer">
+  <div class="cart-hdr">
+    <h3>Carrito</h3>
+    <div class="cart-hdr-right">
+      <div class="cart-count-chip" id="cart-chip">0 items</div>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty" id="cart-empty">
+      <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Tu carrito está vacío.<br/>Agrega modelos desde el catálogo.</p>
+      <button class="btn-gold" onclick="closeCart();document.getElementById('catalog').scrollIntoView({behavior:'smooth'})" style="font-size:.7rem;padding:.7rem 1.4rem">Ver Catálogo →</button>
+    </div>
+    <div id="cart-items"></div>
+  </div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-subtotal">
+      <span>Total de modelos</span>
+      <span id="cart-total-qty">0 items</span>
+    </div>
+    <div class="cart-actions">
+      <a class="cart-btn-wa" id="cart-wa-btn" href="#" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Pedir por WhatsApp
+      </a>
+      <button class="cart-btn-form" onclick="openForm()">
+        <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Pedir por la App
+      </button>
+    </div>
+    <button class="cart-clear" onclick="clearCart()">Vaciar carrito</button>
+  </div>
+</div>
+
+<!-- ── ORDER FORM MODAL ── -->
+<div id="form-ov" onclick="e=>{if(e.target===this)closeForm()}">
+  <div class="form-modal" onclick="event.stopPropagation()">
+    <div class="fm-hdr">
+      <h3>Formulario de Pedido</h3>
+      <button class="fm-close" onclick="closeForm()">✕</button>
+    </div>
+    <!-- FORM VIEW -->
+    <div class="fm-body" id="fm-body">
+      <div class="fm-summary" id="fm-summary"></div>
+      <div class="fld-row">
+        <div class="fld">
+          <label>Nombre / Empresa</label>
+          <input type="text" id="fm-name" placeholder="Tu nombre o negocio"/>
+        </div>
+        <div class="fld">
+          <label>País</label>
+          <select id="fm-pais">
+            <option value="">Seleccionar...</option>
+            <option>🇨🇴 Colombia</option>
+            <option>🇻🇪 Venezuela</option>
+            <option>🇵🇦 Panamá</option>
+            <option>🇪🇨 Ecuador</option>
+            <option>Otro país</option>
+          </select>
+        </div>
+      </div>
+      <div class="fld-row">
+        <div class="fld">
+          <label>Ciudad</label>
+          <input type="text" id="fm-ciudad" placeholder="Tu ciudad"/>
+        </div>
+        <div class="fld">
+          <label>WhatsApp</label>
+          <input type="tel" id="fm-wa" placeholder="+57 300 000 0000"/>
+        </div>
+      </div>
+      <div class="fld">
+        <label>Notas adicionales</label>
+        <textarea id="fm-notas" placeholder="Tallas que más pides, colores preferidos, preguntas..."></textarea>
+      </div>
+      <button class="fm-submit" onclick="submitForm()">Enviar Pedido →</button>
+    </div>
+    <!-- SUCCESS VIEW -->
+    <div class="fm-success" id="fm-success">
+      <div class="check">✅</div>
+      <h4>¡Pedido registrado!</h4>
+      <p>Recibirás confirmación por WhatsApp. Nuestra asesora te contactará en breve con disponibilidad y precios.</p>
+      <a class="cart-btn-wa wa-confirm" id="fm-wa-confirm" href="#" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Confirmar por WhatsApp
+      </a>
+      <button onclick="closeForm()" style="font-size:.72rem;color:var(--muted);margin-top:.3rem;background:none;cursor:pointer">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div id="lb" onclick="closeLb()">
+  <button class="lb-x" onclick="closeLb()">✕</button>
+  <button class="lb-nav" id="lb-prev" onclick="event.stopPropagation();lbMove(-1)">‹</button>
+  <img id="lb-img" src="" alt=""/>
+  <button class="lb-nav" id="lb-next" onclick="event.stopPropagation();lbMove(1)">›</button>
+  <div class="lb-cnt" id="lb-cnt"></div>
+</div>
+
+<!-- ── SCROLL TOP ── -->
+<button id="top-btn" onclick="scrollTo({top:0,behavior:'smooth'})" title="Subir">↑</button>
+
+<!-- ── MOBILE BOTTOM NAV ── -->
+<div id="bot-nav">
+  <div class="bn-item on" onclick="scrollTo({top:0,behavior:'smooth'});setBotNav(this)">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    Inicio
+  </div>
+  <div class="bn-item" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'});setBotNav(this)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Catálogo
+  </div>
+  <div class="bn-center" onclick="openCart()">
+    <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <div class="cart-badge" id="cart-badge-bot" style="top:-3px;right:-3px">0</div>
+  </div>
+  <div class="bn-item" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'});setBotNav(this)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+    Galería
+  </div>
+  <div class="bn-item" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});setBotNav(this)">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Contacto
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   PRODUCTS DATA
+============================================================ */
+const BASE_C = 'assets/images/catalogo/';
+const WA_NUM = 'https://wa.me/573134656014?text=';
+
+const PRODS = [
+  // ── TACONES ──
+  {id:0,  name:'Tacón Cubano',      cat:'tacon',    img:'assets/images/tacon_cubano.jpg',    badge:'Popular',    desc:'Tacón bloque · Tira tobillo · Gamuza',        price:'$63.000'},
+  {id:1,  name:'Tacón Ruby',        cat:'tacon',    img:'assets/images/tacon_ruby.jpg',      badge:null,         desc:'Mule · Charol · Tacón aguja',                price:'Consultar'},
+  {id:2,  name:'Tacón Alice',       cat:'tacon',    img:'assets/images/tacon_alice.jpg',     badge:null,         desc:'Tacón transparente · Tira tobillo',           price:'Consultar'},
+  {id:3,  name:'Tacón Belsy',       cat:'tacon',    img:'assets/images/product_extra6.jpg',  badge:'Nuevo',      desc:'Charol rojo · Hebilla · Tacón cubano',        price:'$69.000'},
+  {id:4,  name:'Cuña de Perlas',    cat:'tacon',    img:'assets/images/cuna_perlas.jpg',     badge:'Tendencia',  desc:'Espadrille · Perlas decorativas · Plataforma',price:'$89.000'},
+  {id:5,  name:'Tacón de Bloque',   cat:'tacon',    img:BASE_C+'vitrina_catalogo_19_post_31_3_2026_6_45_003863976033385282808.jpg', badge:'5 colores', desc:'Tacón bloque · Gamuza · Varios colores', price:'Consultar'},
+  {id:6,  name:'Tacón Stiletto',    cat:'tacon',    img:BASE_C+'vitrina_catalogo_19_post_5_4_2026_10_00_003863989227910689894.jpg', badge:'HOT', desc:'Tacón aguja · Charol · Elegante',        price:'Consultar'},
+  {id:7,  name:'Tacón Elegante',    cat:'tacon',    img:BASE_C+'vitrina_calzadonineteen_post_10_10_2024_19_42_103476132689155537024.jpg', badge:'3 colores', desc:'Diseño clásico · Cuero sintético · Bloque', price:'Consultar'},
+  // ── BOTINES ──
+  {id:8,  name:'Botín Liah',        cat:'botin',    img:'assets/images/botin_liah.jpg',      badge:'Top',        desc:'Gamuza camel · Hebilla dorada · Bloque',      price:'Consultar'},
+  {id:9,  name:'Botín Kersa',       cat:'botin',    img:'assets/images/botin_kersa.jpg',     badge:null,         desc:'Gamuza negra · Suela gruesa · Hebilla',       price:'$89.000'},
+  {id:10, name:'Botín Listón',      cat:'botin',    img:'assets/images/botin_liston.jpg',    badge:'Nuevo',      desc:'Gamuza negra · Moño de satín · Plataforma',   price:'Consultar'},
+  {id:11, name:'Colegial Clásico',  cat:'botin',    img:'assets/images/product_extra2.jpg',  badge:null,         desc:'Cuero sintético · Hebilla · Antideslizante',  price:'Consultar'},
+  {id:12, name:'Botín Moda 2026',   cat:'botin',    img:BASE_C+'vitrina_catalogo_19_post_4_4_2026_8_45_003863987664626472949.jpg', badge:'5 colores', desc:'Botín de moda · Varios estilos · Colección nueva', price:'Consultar'},
+  {id:13, name:'Botín Premium',     cat:'botin',    img:BASE_C+'vitrina_calzadonineteen_post_10_11_2025_12_00_003762812849086109140.jpg', badge:'3 colores', desc:'Acabado premium · Material de calidad',  price:'Consultar'},
+  // ── BALETAS ──
+  {id:14, name:'Baleta Corazón',    cat:'baleta',   img:'assets/images/baleta_corazon.jpg',  badge:'Popular',    desc:'Slingback · Detalle corazón dorado',          price:'$55.000'},
+  {id:15, name:'Baleta Kiut',       cat:'baleta',   img:'assets/images/baleta_kiut.jpg',     badge:null,         desc:'Charol · Tiras cruzadas · Moño · Punta fina', price:'Consultar'},
+  {id:16, name:'Baleta Leopardo',   cat:'baleta',   img:'assets/images/baleta_leopardo.jpg', badge:null,         desc:'Print animal · Slingback · Punta cerrada',    price:'Consultar'},
+  {id:17, name:'Baleta Exclusiva',  cat:'baleta',   img:BASE_C+'vitrina_catalogo_19_post_30_3_2026_6_45_003863973380412473675.jpg', badge:'NUEVO · 7 col.', desc:'Diseño exclusivo · 7 variantes de color', price:'Consultar'},
+  {id:18, name:'Baleta Clásica',    cat:'baleta',   img:BASE_C+'vitrina_catalogo_19_post_1_4_2026_6_45_003863978235873003518.jpg', badge:'3 colores', desc:'Estilo clásico · Cómoda · Versátil',     price:'Consultar'},
+  {id:19, name:'Baleta Mármol',     cat:'baleta',   img:BASE_C+'vitrina_calzadonineteen_post_10_11_2025_16_00_003762813443226061373.jpg', badge:'Ed. Especial', desc:'Diseño mármol único · Edición limitada', price:'Consultar'},
+  // ── SANDALIAS ──
+  {id:20, name:'Sandalia Premium',  cat:'sandalia', img:BASE_C+'vitrina_catalogo_19_post_3_4_2026_6_45_003863986384382279501.jpg', badge:'8 colores', desc:'Sandalia de moda · 8 variantes · Tiras finas', price:'Consultar'},
+  {id:21, name:'Sandalia Tiras',    cat:'sandalia', img:BASE_C+'vitrina_catalogo_19_post_2_4_2026_6_45_003863985006377284016.jpg', badge:'4 colores', desc:'Tiras elegantes · Diseño moderno',       price:'Consultar'},
+  // ── DEPORTIVOS ──
+  {id:22, name:'Deportivo Atenas',  cat:'deportivo',img:'assets/images/deportivo_atenas.jpg',badge:'Top ventas', desc:'Estilo retro · Suela goma · Negro / Blanco',  price:'Consultar'},
+  {id:23, name:'Deportivo Bárbara', cat:'deportivo',img:'assets/images/product_extra1.jpg',  badge:null,         desc:'Gamuza · Suela blanca · Detalles crema',      price:'$63.000'},
+  {id:24, name:'Mocasín Print',     cat:'deportivo',img:'assets/images/product_extra7.jpg',  badge:'Nuevo',      desc:'Combinado · Print leopardo · Plataforma',     price:'Consultar'},
+  {id:25, name:'Deportivo Exclusivo',cat:'deportivo',img:BASE_C+'vitrina_calzadonineteen_post_10_12_2025_12_00_003784557093077206655.jpg', badge:'Ed. Especial', desc:'Diseño exclusivo · Edición limitada',   price:'Consultar'},
+  // ── KIDS ──
+  {id:26, name:'Unicornic Kids',    cat:'kids',     img:'assets/images/product_extra4.jpg',  badge:'Kids',       desc:'Tenis niñas · Unicornio · Colores pastel',    price:'$63.000'},
+];
+
+/* ============================================================
+   CART STATE
+============================================================ */
+let cart = JSON.parse(localStorage.getItem('nineteen_cart') || '[]');
+
+function saveCart() { localStorage.setItem('nineteen_cart', JSON.stringify(cart)); }
+
+function cartTotal() { return cart.reduce((s, i) => s + i.qty, 0); }
+
+function updateCartUI() {
+  const total = cartTotal();
+  const badge = document.getElementById('cart-badge');
+  const badgeBot = document.getElementById('cart-badge-bot');
+  const chip = document.getElementById('cart-chip');
+  const mobN = document.getElementById('mob-cart-n');
+
+  [badge, badgeBot].forEach(b => {
+    if (!b) return;
+    b.textContent = total;
+    b.classList.toggle('show', total > 0);
+  });
+  if (chip) chip.textContent = total + (total === 1 ? ' item' : ' items');
+  if (mobN) mobN.textContent = total;
+
+  // Update add buttons
+  PRODS.forEach(p => {
+    const btn = document.getElementById('add-' + p.id);
+    if (!btn) return;
+    const inCart = cart.find(i => i.id === p.id);
+    if (inCart) {
+      btn.classList.add('added');
+      btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> ${inCart.qty} en carrito`;
+    } else {
+      btn.classList.remove('added');
+      btn.innerHTML = `<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Agregar`;
+    }
+  });
+
+  renderCartItems();
+  buildWaLink();
+}
+
+function addToCart(id) {
+  const prod = PRODS.find(p => p.id === id);
+  if (!prod) return;
+  const existing = cart.find(i => i.id === id);
+  if (existing) { existing.qty++; }
+  else { cart.push({ id: prod.id, name: prod.name, img: prod.img, desc: prod.desc, price: prod.price, qty: 1 }); }
+  saveCart();
+  updateCartUI();
+  // brief feedback
+  const btn = document.getElementById('add-' + id);
+  if (btn) { btn.style.transform = 'scale(1.15)'; setTimeout(() => btn.style.transform = '', 200); }
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  saveCart(); updateCartUI();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id);
+  else { saveCart(); updateCartUI(); }
+}
+
+function clearCart() {
+  if (!confirm('¿Vaciar el carrito?')) return;
+  cart = []; saveCart(); updateCartUI();
+}
+
+function renderCartItems() {
+  const body = document.getElementById('cart-items');
+  const empty = document.getElementById('cart-empty');
+  const footer = document.getElementById('cart-footer');
+  const totalEl = document.getElementById('cart-total-qty');
+
+  if (cart.length === 0) {
+    body.innerHTML = '';
+    empty.style.display = 'flex';
+    footer.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  footer.style.display = 'block';
+  const t = cartTotal();
+  totalEl.textContent = t + (t === 1 ? ' item' : ' items');
+
+  body.innerHTML = cart.map(item => `
+    <div class="cart-item" id="ci-${item.id}">
+      <div class="ci-img"><img src="${item.img}" alt="${item.name}" onerror="this.style.display='none'"/></div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-desc">${item.desc}</div>
+        <div class="ci-controls">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <span class="qty-n">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+          <button class="ci-remove" onclick="removeFromCart(${item.id})">✕ Quitar</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function buildWaLink() {
+  if (cart.length === 0) return;
+  let msg = 'Hola! Quiero hacer un pedido mayorista de Calzado Nineteen 👠\n\n📋 *MI PEDIDO:*\n';
+  cart.forEach(i => { msg += `• ${i.name} × ${i.qty}\n`; });
+  msg += '\n💬 Por favor confirmar precio mayorista, disponibilidad y envío. ¡Gracias!';
+  document.getElementById('cart-wa-btn').href = WA_NUM + encodeURIComponent(msg);
+}
+
+/* ============================================================
+   CART DRAWER
+============================================================ */
+function openCart() {
+  document.getElementById('cart-drawer').classList.add('on');
+  document.getElementById('cart-ov').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  updateCartUI();
+}
+function closeCart() {
+  document.getElementById('cart-drawer').classList.remove('on');
+  document.getElementById('cart-ov').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+/* ============================================================
+   ORDER FORM
+============================================================ */
+function openForm() {
+  const summary = document.getElementById('fm-summary');
+  let html = '<strong>Resumen de tu pedido:</strong>';
+  cart.forEach(i => { html += `${i.name} × ${i.qty}<br/>`; });
+  summary.innerHTML = html;
+  document.getElementById('fm-body').style.display = 'block';
+  document.getElementById('fm-success').classList.remove('on');
+  document.getElementById('form-ov').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeForm() {
+  document.getElementById('form-ov').classList.remove('on');
+  document.body.style.overflow = '';
+  // reset form
+  setTimeout(() => {
+    document.getElementById('fm-name').value = '';
+    document.getElementById('fm-pais').value = '';
+    document.getElementById('fm-ciudad').value = '';
+    document.getElementById('fm-wa').value = '';
+    document.getElementById('fm-notas').value = '';
+    document.getElementById('fm-body').style.display = 'block';
+    document.getElementById('fm-success').classList.remove('on');
+  }, 300);
+}
+function submitForm() {
+  const name = document.getElementById('fm-name').value.trim();
+  const pais = document.getElementById('fm-pais').value;
+  const ciudad = document.getElementById('fm-ciudad').value.trim();
+  const wa = document.getElementById('fm-wa').value.trim();
+  const notas = document.getElementById('fm-notas').value.trim();
+
+  if (!name) { document.getElementById('fm-name').focus(); alert('Por favor ingresa tu nombre.'); return; }
+  if (!pais) { document.getElementById('fm-pais').focus(); alert('Por favor selecciona tu país.'); return; }
+
+  // Build WA confirmation message
+  let msg = `Hola, tengo un pedido mayorista de Calzado Nineteen:\n\n`;
+  msg += `👤 *Cliente:* ${name}\n`;
+  msg += `📍 *País:* ${pais} ${ciudad ? '- ' + ciudad : ''}\n`;
+  if (wa) msg += `📱 *WhatsApp:* ${wa}\n`;
+  msg += `\n📋 *PEDIDO:*\n`;
+  cart.forEach(i => { msg += `• ${i.name} × ${i.qty}\n`; });
+  if (notas) msg += `\n📝 *Notas:* ${notas}`;
+  msg += `\n\n¡Por favor confirmar disponibilidad y precios!`;
+
+  document.getElementById('fm-wa-confirm').href = WA_NUM + encodeURIComponent(msg);
+  document.getElementById('fm-body').style.display = 'none';
+  document.getElementById('fm-success').classList.add('on');
+}
+
+/* ============================================================
+   CATALOG RENDER
+============================================================ */
+let curCat = 'all';
+function renderCatalog(cat) {
+  curCat = cat;
+  const list = cat === 'all' ? PRODS : PRODS.filter(p => p.cat === cat);
+  const grid = document.getElementById('prod-grid');
+  if (!list.length) { grid.innerHTML = '<div class="no-prods">No hay modelos en esta categoría.</div>'; return; }
+  grid.innerHTML = list.map(p => `
+    <div class="pc">
+      <div class="pc-img">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.closest('.pc').remove()"/>
+        ${p.badge ? `<div class="pc-badge">${p.badge}</div>` : ''}
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-desc">${p.desc}</div>
+        <div class="pc-footer">
+          <div class="pc-price">${p.price}</div>
+          <button class="pc-add" id="add-${p.id}" onclick="addToCart(${p.id})">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Agregar
+          </button>
+        </div>
+      </div>
+    </div>`).join('');
+  updateCartUI();
+}
+
+document.querySelectorAll('.f-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    renderCatalog(btn.dataset.cat);
+  });
+});
+renderCatalog('all');
+
+/* ============================================================
+   NAV & MOBILE MENU
+============================================================ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+  document.getElementById('top-btn').classList.toggle('on', scrollY > 500);
+});
+
+let mOpen = false;
+function toggleMenu() {
+  mOpen = !mOpen;
+  document.getElementById('mob-menu').classList.toggle('on', mOpen);
+  document.getElementById('mob-ov').classList.toggle('on', mOpen);
+  const s = document.getElementById('hbg').children;
+  s[0].style.transform = mOpen ? 'rotate(45deg) translate(5px,5px)' : '';
+  s[1].style.opacity   = mOpen ? '0' : '';
+  s[2].style.transform = mOpen ? 'rotate(-45deg) translate(5px,-5px)' : '';
+}
+function closeMenu() {
+  mOpen = false;
+  document.getElementById('mob-menu').classList.remove('on');
+  document.getElementById('mob-ov').classList.remove('on');
+  const s = document.getElementById('hbg').children;
+  s[0].style.transform = s[1].style.opacity = s[2].style.transform = '';
+}
+function setBotNav(el) {
+  document.querySelectorAll('.bn-item').forEach(n => n.classList.remove('on'));
+  el.classList.add('on');
+}
+
+/* ============================================================
+   HERO COUNTERS + LOAD
+============================================================ */
+window.addEventListener('load', () => {
+  document.getElementById('hero').classList.add('go');
+  [['hc1', 297, '+'], ['hc2', 20, 'K']].forEach(([id, t, suf]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let c = 0; const step = t / 60;
+    const tm = setInterval(() => { c = Math.min(c + step, t); el.textContent = Math.floor(c) + suf; if (c >= t) clearInterval(tm); }, 22);
+  });
+  updateCartUI();
+});
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+}, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ============================================================
+   REVIEWS
+============================================================ */
+const REVS = [
+  {q:'"Recibí mis botines en perfectas condiciones. La calidad es increíble para el precio. ¡Ya hice mi segundo pedido para mi boutique!"', a:'— María González · Boutique · Bogotá, Colombia'},
+  {q:'"Las baletas llegaron desde Venezuela en 5 días. Material de primera, precio justo. 100% recomendado para revendedoras."', a:'— Valentina Rodríguez · Revendedora · Caracas, Venezuela'},
+  {q:'"Compré al por mayor para mi tienda en Panamá. Excelente atención y calidad AAA real. ¡Ya voy por el tercer pedido!"', a:'— Carolina Méndez · Distribuidora · Ciudad de Panamá'},
+];
+let ri = 0;
+function goRev(i) {
+  ri = i;
+  const b = document.getElementById('rev-box');
+  b.style.cssText = 'opacity:0;transform:translateY(8px);transition:.3s';
+  setTimeout(() => {
+    b.innerHTML = `<p class="rev-q">${REVS[i].q}</p><div class="rev-auth">${REVS[i].a}</div>`;
+    b.style.cssText = 'opacity:1;transform:none;transition:.3s';
+  }, 280);
+  document.querySelectorAll('.rev-dot').forEach((d, j) => d.classList.toggle('on', j === i));
+}
+setInterval(() => goRev((ri + 1) % REVS.length), 6000);
+
+/* ============================================================
+   WA FAB
+============================================================ */
+function toggleWa() { document.getElementById('wa-panel').classList.toggle('on'); }
+document.addEventListener('click', e => {
+  if (!document.getElementById('wa-fab').contains(e.target)) document.getElementById('wa-panel').classList.remove('on');
+});
+
+/* ============================================================
+   LIGHTBOX
+============================================================ */
+const LB = [
+  'assets/images/botin_liston.jpg','assets/images/tacon_ruby.jpg',
+  'assets/images/cuna_perlas_lifestyle.jpg','assets/images/sneaker_lifestyle.jpg',
+  'assets/images/baleta_kiut.jpg','assets/images/tacon_alice.jpg',
+  'assets/images/dos_estilos.jpg','assets/images/baleta_leopardo.jpg',
+  'assets/images/modelo_lifestyle.jpg','assets/images/welcome.jpg',
+];
+let lbI = 0;
+function openLb(i) {
+  lbI = i;
+  document.getElementById('lb-img').src = LB[i];
+  document.getElementById('lb-cnt').textContent = `${i + 1} / ${LB.length}`;
+  document.getElementById('lb').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() { document.getElementById('lb').classList.remove('on'); document.body.style.overflow = ''; }
+function lbMove(d) {
+  lbI = (lbI + d + LB.length) % LB.length;
+  document.getElementById('lb-img').src = LB[lbI];
+  document.getElementById('lb-cnt').textContent = `${lbI + 1} / ${LB.length}`;
+}
+document.addEventListener('keydown', e => {
+  if (document.getElementById('lb').classList.contains('on')) {
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowRight') lbMove(1);
+    if (e.key === 'ArrowLeft') lbMove(-1);
+  }
+});
+</script>
+</body>
+</html>
